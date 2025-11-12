@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/skus")
@@ -24,7 +25,7 @@ public class SkuProductController {
 
     // 🔹 Buscar SKU por ID
     @GetMapping("/{id}")
-    public ResponseEntity<SkuProduct> getById(@PathVariable Long id) {
+    public ResponseEntity<SkuProduct> getById(@PathVariable UUID id) {
         return repository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
