@@ -1,4 +1,4 @@
-package com.example.monkeyBes.persistence;
+package com.example.monkeyBes.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
