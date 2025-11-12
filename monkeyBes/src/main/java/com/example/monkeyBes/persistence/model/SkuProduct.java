@@ -1,25 +1,24 @@
 package com.example.monkeyBes.persistence.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "sku_product")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class SkuProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
     @Column(nullable = false, unique = true, length = 50)
     private String skuCode;
@@ -33,8 +32,8 @@ public class SkuProduct {
     @Column(nullable = false, precision = 4, scale = 2)
     private BigDecimal price;
 
-    @Column(nullable = false)
-    private int stockQuantity;
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, optional = false)
+    private Stock stock;
 
     @Override
     public boolean equals(Object o) {
@@ -55,7 +54,6 @@ public class SkuProduct {
                 ", skuCode='" + skuCode + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", stockQuantity=" + stockQuantity +
                 '}';
     }
 }
