@@ -7,7 +7,12 @@ import service.GenericService;
 import java.util.UUID;
 
 public class ProductService implements GenericService<UUID, SkuProduct> {
-    private SkuProductRepository repository;
+    private final SkuProductRepository repository;
+
+    public ProductService(SkuProductRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
     public void create(SkuProduct entity) {
         repository.save(entity);
