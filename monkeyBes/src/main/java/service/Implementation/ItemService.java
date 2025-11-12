@@ -2,10 +2,12 @@ package service.Implementation;
 
 import com.example.monkeyBes.persistence.access.ItemRepository;
 import com.example.monkeyBes.persistence.model.Item;
+import org.springframework.stereotype.Service;
 import service.GenericService;
 
 import java.util.UUID;
 
+@Service
 public class ItemService implements GenericService<UUID, Item> {
     private ItemRepository repository;
     @Override

@@ -2,10 +2,12 @@ package service.Implementation;
 
 import com.example.monkeyBes.persistence.access.SkuProductRepository;
 import com.example.monkeyBes.persistence.model.SkuProduct;
+import org.springframework.stereotype.Service;
 import service.GenericService;
 
 import java.util.UUID;
 
+@Service
 public class ProductService implements GenericService<UUID, SkuProduct> {
     private final SkuProductRepository repository;
 
