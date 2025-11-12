@@ -1,15 +1,22 @@
-package service.Implementation;
+package com.example.monkeyBes.service.Implementation;
 
 import com.example.monkeyBes.persistence.access.ItemRepository;
 import com.example.monkeyBes.persistence.model.Item;
 import org.springframework.stereotype.Service;
-import service.GenericService;
+import com.example.monkeyBes.service.GenericService;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class ItemService implements GenericService<UUID, Item> {
-    private ItemRepository repository;
+    private final ItemRepository repository;
+
+    public ItemService(ItemRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
 
     public void create(Item item) {
@@ -28,7 +35,12 @@ public class ItemService implements GenericService<UUID, Item> {
     }
 
     @Override
-    public Item find(UUID entityId) {
+    public Optional<Item> find(UUID entityId) {
         return null;
+    }
+
+    @Override
+    public List<Item> findAll() {
+        return repository.findAll();
     }
 }
