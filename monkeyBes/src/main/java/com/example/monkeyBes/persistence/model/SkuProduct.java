@@ -2,9 +2,11 @@ package com.example.monkeyBes.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -34,6 +36,10 @@ public class SkuProduct {
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, optional = false)
     private Stock stock;
+
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<Item> items;
 
     @Override
     public boolean equals(Object o) {

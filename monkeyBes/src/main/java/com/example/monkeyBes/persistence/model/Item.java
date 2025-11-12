@@ -20,8 +20,9 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    @Column(nullable = false)
-    private UUID productId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    private SkuProduct product;
 
     @Column(nullable = false)
     private int quantity;
