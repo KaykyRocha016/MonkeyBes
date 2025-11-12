@@ -1,9 +1,15 @@
 package com.example.monkeyBes.presentation;
 
-import com.example.monkeyBes.persistence.access.SkuProductRepository;
 import com.example.monkeyBes.persistence.model.SkuProduct;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.example.monkeyBes.service.Implementation.ItemService;
+import com.example.monkeyBes.service.Implementation.ProductService;
+import com.example.monkeyBes.service.Implementation.StockService;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,24 +17,27 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/skus")
 public class SkuProductController {
-    private final SkuProductRepository repository;
+    private final ProductService productService;
 
-    public SkuProductController(SkuProductRepository repository) {
-        this.repository = repository;
+
+    public SkuProductController( ProductService productService) {
+        this.productService = productService;
     }
 
     // 🔹 Listar todos os SKUs
     @GetMapping
     public ResponseEntity<List<SkuProduct>> getAll() {
-        return ResponseEntity.ok(repository.findAll());
+        return ResponseEntity.ok(productService.findAll());
     }
 
     // 🔹 Buscar SKU por ID
     @GetMapping("/{id}")
     public ResponseEntity<SkuProduct> getById(@PathVariable UUID id) {
-        return repository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        var product = productService.find(id);
+        if(product.isPresent()) {
+            return ResponseEntity.ok(product.get());
+        };
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     // 🔹 Criar novo SKU
