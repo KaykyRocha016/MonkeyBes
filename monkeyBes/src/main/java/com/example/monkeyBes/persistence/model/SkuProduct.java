@@ -19,7 +19,7 @@ import java.util.UUID;
 public class SkuProduct {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false, unique = true, length = 50)
@@ -31,7 +31,7 @@ public class SkuProduct {
     @Column()
     private String description;
 
-    @Column(nullable = false, precision = 4, scale = 2)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, optional = false)
