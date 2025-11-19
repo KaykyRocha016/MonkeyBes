@@ -20,6 +20,6 @@ public interface ItemRepository extends JpaRepository<Item, UUID> {
             "FROM Item i " +
             "GROUP BY i.product " +
             "ORDER BY totalSold ASC")
-    List<Object[]> findLastSoldProducts();
+    List<Object[]> findLeastSoldProducts();
 
 }
