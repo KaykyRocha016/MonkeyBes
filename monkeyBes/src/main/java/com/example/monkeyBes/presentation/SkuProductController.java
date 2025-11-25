@@ -39,6 +39,11 @@ public class SkuProductController {
 
     @PostMapping
     public ResponseEntity<SkuProduct> create(@RequestBody SkuProduct product) {
+        // Garantir que os campos de relacionamento que serão gerenciados separadamente (Stock e Items)
+        // estejam nulos no momento da criação, evitando erros de cascata do JPA ao salvar um objeto incompleto.
+        product.setStock(null);
+        product.setItems(null);
+
         productService.create(product);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

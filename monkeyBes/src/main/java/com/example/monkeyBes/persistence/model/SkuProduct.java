@@ -2,7 +2,6 @@ package com.example.monkeyBes.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -34,7 +33,7 @@ public class SkuProduct {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, optional = false)
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private Stock stock;
 
 
@@ -63,4 +62,3 @@ public class SkuProduct {
                 '}';
     }
 }
-
